@@ -1,0 +1,126 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model HeroSection {
+  id                   String   @id @default(uuid())
+  h1Text               String
+  h1TextColour         String
+  h3Text               String
+  h3TextColour         String
+  pText                String
+  pTextColour          String
+  buttonText           String
+  buttonTextColour     String
+  buttonBgColour       String
+  formBgColour         String
+  formButtonBgColour   String
+  formButtonText       String
+  formButtonTextColour String
+  bgVideo              String
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model HeroSection2 {
+  id               String   @id @default(uuid())
+  h1Text           String?
+  h1TextColour     String?
+  pointsText       String? // e.g. comma-separated or JSON
+  pointsTextColour String?
+  pText            String?
+  pTextColour      String?
+  image            String? // URL
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model HeroSection3 {
+  id               String   @id @default(uuid())
+  divBg            String?
+  div1Bg           String?
+  div2Bg           String?
+  h1Text           String?
+  h1TextColour     String?
+  pText            String?
+  pTextColour      String?
+  buttonText       String
+  buttonTextColour String
+  buttonBgColour   String
+  image            String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model WorkSection {
+  id                   String   @id @default(uuid())
+  h2Text               String?
+  h2TextColour         String?
+  h1Text               String?
+  h1TextColour         String?
+  pText                String?
+  pTextColour          String?
+  buttonText           String
+  buttonTextColour     String
+  buttonBgColour       String?
+  buttonColourOnClick  String?
+  buttonColourOnHover  String?
+  button2Text          String
+  button2TextColour    String
+  button2BgColour      String?
+  button2ColourOnClick String?
+  button2ColourOnHover String?
+  button3Text          String
+  button3TextColour    String
+  button3BgColour      String?
+  button3ColourOnClick String?
+  button3ColourOnHover String?
+  button4Text          String
+  button4TextColour    String
+  button4BgColour      String?
+  button4ColourOnClick String?
+  button4ColourOnHover String?
+  image                String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model SliderImage1 {
+  id        String   @id @default(cuid())
+  imageUrl  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FeatureSectionContent {
+  id              String   @id @default(cuid())
+
+  topText         String?
+  topColor        String?
+
+  h1Text          String?
+  h1Color         String?
+
+  subText         String?
+  subColor        String?
+
+  boldText        String?
+  boldColor       String?
+
+  bgColor         String?  // Solid or gradient
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+

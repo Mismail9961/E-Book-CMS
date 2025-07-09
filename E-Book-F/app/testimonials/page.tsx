@@ -2,8 +2,8 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import AboutWelcome from '../components/ClientAbout'
 import NewTestnamnials from "../components/Testnamnials"
-import TestLastForm from "../components/LastForm"
 import Footer from '../components/Footer'
+import Hero from '../components/HeroSection'
 
 const page = () => {
   return (
@@ -11,7 +11,7 @@ const page = () => {
         <Navbar/>
         <AboutWelcome/>
         <NewTestnamnials/>
-        <TestLastForm/>
+        <Hero/>
         <Footer/> 
     </div>
   )

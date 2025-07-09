@@ -104,23 +104,188 @@ model SliderImage1 {
 }
 
 model FeatureSectionContent {
-  id              String   @id @default(cuid())
+  id String @id @default(cuid())
 
-  topText         String?
-  topColor        String?
+  topText  String?
+  topColor String?
 
-  h1Text          String?
-  h1Color         String?
+  h1Text  String?
+  h1Color String?
 
-  subText         String?
-  subColor        String?
+  subText  String?
+  subColor String?
 
-  boldText        String?
-  boldColor       String?
+  boldText  String?
+  boldColor String?
 
-  bgColor         String?  // Solid or gradient
+  bgColor String? // Solid or gradient
 
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
+model Cards {
+  id                String   @id @default(uuid())
+  h1Text1           String?
+  h1Text1Color      String?
+  h1Text2           String?
+  h1Text2Color      String?
+  cardBgColor       String?
+  cardInsideNumber  String?
+  cardBodyText      String?
+  cardBodyTextColor String?
+  cardH2Text        String?
+  cardH2TextColor   String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Testimonial {
+  id            String   @id @default(uuid())
+  subtitle      String?
+  subtitleColor String? // color for subtitle text
+  title         String?
+  titleColor    String? // color for title text
+  quote         String?
+  quoteColor    String? // quote text color
+  position      String?
+  positionColor String?
+  name          String?
+  nameColor     String?
+  company       String?
+  companyColor  String?
+  bgColor       String? // background color of section
+  cardColor     String? // color of individual testimonial card
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model LastSection {
+  id           String @id @default(uuid())
+  h1Text       String
+  h1TextColour String
+  h3Text       String
+  h3TextColour String
+
+  formBgColour         String
+  formButtonBgColour   String
+  formButtonText       String
+  formButtonTextColour String
+
+  bgImage String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AboutUsH1 {
+  id    String  @id @default(uuid())
+  divBg String?
+
+  h3Text       String?
+  h3TextColour String?
+  h3cardBg     String?
+
+  h1Text       String?
+  h1TextColour String?
+
+  pText       String?
+  pTextColour String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AboutUsCards {
+  id           String  @id @default(uuid())
+  sectionBg    String?
+  h3Text       String?
+  h3TextColour String?
+  h1Text       String?
+  h1TextColour String?
+
+  card1Title1       String?
+  card1Title2       String?
+  card1TitleColour1 String?
+  card1TitleColour2 String?
+  card1Paragraph    String?
+  card1TextColour   String?
+  card1Bg           String?
+
+  card2Title1       String?
+  card2Title2       String?
+  card2TitleColour1 String?
+  card2TitleColour2 String?
+  card2Paragraph    String?
+  card2TextColour   String?
+  card2Bg           String?
+
+  card3Title1       String?
+  card3Title2       String?
+  card3TitleColour1 String?
+  card3TitleColour2 String?
+  card3Paragraph    String?
+  card3TextColour   String?
+  card3Bg           String?
+
+  button1Text       String?
+  button1TextColour String?
+  button1BgColour   String?
+
+  button2Text       String?
+  button2TextColour String?
+  button2BgColour   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AboutHeroSection {
+  id               String   @id @default(uuid())
+  h1Text           String?
+  h1TextColour     String?
+  pointsText       String? // e.g. comma-separated or JSON
+  pointsTextColour String?
+  pText            String?
+  pTextColour      String?
+  image            String? // URL
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model TestimonialHeader {
+  id                 String   @id @default(uuid())
+  
+  topBadgeText       String   // e.g., "WE FOCUS ON DRIVING MEASURABLE RESULTS"
+  topBadgeTextColor  String?  // e.g., "#FFFFFF"
+  topBadgeBgColor    String?  // e.g., "#0033FF"
+
+  h1TextPrefix       String   // e.g., "Client's"
+  h1TextPrefixColor  String?  // e.g., "#FFFFFF"
+
+  h1TextMain         String   // e.g., "Testimonials"
+  h1TextMainColor    String?  // e.g., "#00E6F6"
+
+  sectionBgColor     String?  // e.g., "#0F0A1E" (background gradient can be generated from this)
+
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+
+model ContactHeaderSection {
+  id                  String   @id @default(uuid())
+  badgeText           String?
+  badgeTextColor      String?
+  badgeBgColor        String?
+  h1TextPart1         String?
+  h1TextPart1Color    String?
+  h1TextPart2         String?
+  h1TextPart2Color    String?
+  paragraphText       String?
+  paragraphTextColor  String?
+  backgroundColor     String?
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}

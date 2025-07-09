@@ -7,10 +7,10 @@ import AboutButtons from '../components/AboutButtons'
 import AboutDelivirng from "../components/AboutDelivring"
 import PublishingSection from "../components/PublishingSection"
 import Cards from "../components/Cards"
-import ChoseProffesional from '../components/ChoseProffesional'
 import Testnamnials from "../components/Testnamnials"
 import LastForm from "../components/LastForm"
 import Footer from '../components/Footer'
+import Hero from '../components/HeroSection'
 
 const about = () => {
   return (
@@ -22,10 +22,9 @@ const about = () => {
       <AboutButtons/>
       <AboutDelivirng/>
       <PublishingSection/>
-      <ChoseProffesional/>
       <Cards/>
       <Testnamnials/>
-      <LastForm/>
+      <Hero/>
       <Footer/>
     </div>
   )

@@ -6,11 +6,10 @@ import WebDesignProcess from '../components/WebDesignProcess'
 import AgencyValues from '../components/AgencyValues'
 import AboutCards from '../components/AboutCards'
 import PublishingSection from "../components/PublishingSection"
-import ChoseProffesional from "../components/ChoseProffesional";
 import Cards from "../components/Cards"
 import Testnamnials from "../components/Testnamnials"
-import LastForm from "../components/LastForm"
 import Footer from "../components/Footer";
+import Hero from '../components/HeroSection'
 
 const page = () => {
     return (
@@ -22,10 +21,9 @@ const page = () => {
             <AgencyValues />
             <AboutCards />
             <PublishingSection />
-            <ChoseProffesional />
             <Cards />
             <Testnamnials />
-            <LastForm />
+            <Hero/>
             <Footer />
         </div>
     )

@@ -1,7 +1,28 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+type HeroSection = {
+  h1Text: string;
+  h1TextColour: string;
+  h3Text: string;
+  h3TextColour: string;
+  pText: string;
+  pTextColour: string;
+  buttonText: string;
+  buttonTextColour: string;
+  buttonBgColour: string;
+  formBgColour: string;
+  formButtonBgColour: string;
+  formButtonText: string;
+  formButtonTextColour: string;
+  bgVideo: string;
+};
 
 const Hero = () => {
+  const [heroData, setHeroData] = useState<HeroSection | null>(null);
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -15,11 +36,22 @@ const Hero = () => {
     },
   });
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/herosection");
+        setHeroData(res.data);
+      } catch (error) {
+        console.error("Error fetching hero data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value, type } = e.target;
-
     if (type === "checkbox") {
       const checked = (e.target as HTMLInputElement).checked;
       setForm((prev) => ({
@@ -37,47 +69,76 @@ const Hero = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(form);
-    // Submission logic here
   };
 
+  if (!heroData) {
+    return <div className="text-white p-10">Loading...</div>;
+  }
+
   return (
-    <div className="relative h-[70vh] mb-20  w-full overflow-hidden">
+    <div className="relative w-full min-h-[70vh] overflow-hidden flex items-center justify-center">
       <video
-        className="absolute top-0 left-0 w-full h-full object-cover z-0"
-        src="https://pearsonbookspublishing.co.uk/neo/assets/video/large.mp4"
+        src={heroData.bgVideo}
         autoPlay
         muted
         loop
         playsInline
-      ></video>
+        controls={false}
+        className="absolute top-0 left-0 w-full h-full object-cover"
+      />
 
-      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between h-full px-4 md:px-10 py-10 text-white bg-black/40 gap-10 md:gap-0">
-        {/* Left Text Section */}
-        <div className="md:w-1/2 w-full flex flex-col justify-center gap-4 text-center md:text-left">
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-[#2DEBFF]">
-            TAKE THE SKILLS TO ROAD
+      <div className="relative z-10 w-full h-full px-4 py-10 sm:px-8 md:px-12 flex flex-col md:flex-row justify-between items-center gap-10 bg-black/40">
+        {/* Left Content */}
+        <div className="w-full md:w-1/2 flex flex-col gap-6 text-center md:text-left">
+          <h1
+            className="text-xl sm:text-2xl md:text-3xl font-semibold"
+            style={{ color: heroData.h1TextColour }}
+          >
+            {heroData.h1Text}
           </h1>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
-            Digitizing Your Business Growth
+          <h2
+            className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight"
+            style={{ color: heroData.h3TextColour }}
+          >
+            {heroData.h3Text}
           </h2>
+          <p
+            className="text-sm sm:text-base text-white leading-relaxed"
+            style={{ color: heroData.pTextColour }}
+          >
+            {heroData.pText}
+          </p>
+          <button
+            className="sm:text-lg font-bold py-2 px-6 rounded-md w-fit transition hover:opacity-90"
+            style={{
+              backgroundColor: heroData.buttonBgColour,
+              color: heroData.buttonTextColour,
+            }}
+          >
+            {heroData.buttonText}
+          </button>
         </div>
 
-        {/* Right Form Section */}
-        <div className="md:w-[40%] w-full bg-[#23257B]/60 p-5 rounded-lg shadow-lg">
-          <div className="relative bg-gradient-to-b p-6 rounded-lg">
-            <div className="absolute -top-6 -right-6 bg-[#281055] text-white w-[65px] h-[65px] rounded-full flex items-center justify-center text-xs font-bold text-center p-2">
-              UPTO 50% OFF
+        {/* Right Form */}
+        <div
+          className="w-full md:w-[40%] p-5 rounded-lg shadow-lg"
+          style={{ backgroundColor: heroData.formBgColour }}
+        >
+          <div className="relative p-6 rounded-lg text-white">
+            <div className="absolute -top-6 -right-6 w-[65px] h-[65px] bg-[#281055] rounded-full flex items-center justify-center text-[11px] font-bold text-center px-2 py-1">
+              UP TO 50% OFF
             </div>
-            <h2 className="text-2xl font-bold mb-2 text-center">
+
+            <h2 className="text-2xl font-bold text-center mb-2">
               Start A Conversation With Us
             </h2>
             <p className="text-sm text-center mb-4">
               What services are you looking for?
             </p>
-            <form onSubmit={handleSubmit} className="space-y-3 text-sm">
+
+            <form onSubmit={handleSubmit} className="space-y-4 text-sm">
               <div className="grid grid-cols-2 gap-2">
-                {[
-                  { name: "web", label: "Web Development" },
+                {[{ name: "web", label: "Web Development" },
                   { name: "app", label: "App Development" },
                   { name: "branding", label: "Branding" },
                   { name: "digital", label: "Digital Marketing" },
@@ -86,7 +147,9 @@ const Hero = () => {
                     <input
                       type="checkbox"
                       name={name}
-                      checked={form.services[name as keyof typeof form.services]}
+                      checked={
+                        form.services[name as keyof typeof form.services]
+                      }
                       onChange={handleChange}
                       className="accent-purple-600"
                     />
@@ -94,6 +157,7 @@ const Hero = () => {
                   </label>
                 ))}
               </div>
+
               <input
                 type="text"
                 name="name"
@@ -128,9 +192,13 @@ const Hero = () => {
               />
               <button
                 type="submit"
-                className="w-full py-2 rounded bg-gradient-to-r from-purple-700 to-indigo-900 hover:opacity-90 transition text-white font-semibold"
+                className="w-full py-2 rounded text-[18px] font-semibold hover:opacity-90 transition"
+                style={{
+                  backgroundColor: heroData.formButtonBgColour,
+                  color: heroData.formButtonTextColour,
+                }}
               >
-                Get Started
+                {heroData.formButtonText}
               </button>
             </form>
           </div>
